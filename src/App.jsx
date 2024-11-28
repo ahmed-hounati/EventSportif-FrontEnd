@@ -7,6 +7,8 @@ import SubmitEvent from "./pages/SubmitEvent";
 import Footer from "./components/Footer";
 import NavBAr from "./components/NavBar";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
   return (
@@ -16,6 +18,14 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
           {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/submit-event" element={<SubmitEvent />} /> */}

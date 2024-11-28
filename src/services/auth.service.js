@@ -1,10 +1,11 @@
 import axios from "axios";
 
-let Api = process.env.API_URL;
+let Api = import.meta.env.VITE_API_URL;
 
 const login = async (email, password) => {
     try {
         const response = await axios.post(`${Api}/auth/login`, { email, password });
+        console.log(response.data);
         if (response.data) {
             localStorage.setItem("token", JSON.stringify(response.data.token));
             localStorage.setItem("user", JSON.stringify(response.data.User));
