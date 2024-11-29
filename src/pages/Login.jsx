@@ -52,7 +52,7 @@ export default function Login() {
   };
 
   return (
-    <main className="mx-auto flex h-[90vh] w-full items-center justify-center text-white">
+    <main className="mx-auto flex h-[90vh] w-full items-center justify-center text-white bg-[#141A28]">
       <section className="flex w-[30rem] flex-col space-y-10 overflow-hidden">
         <div className="text-center text-4xl font-medium">Log In</div>
 
