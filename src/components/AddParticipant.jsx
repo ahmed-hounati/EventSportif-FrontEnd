@@ -9,20 +9,18 @@ export default function AddParticipant({ show, onClose }) {
   const [participants, setParticipants] = useState([]);
   const [inscriptions, setInscriptions] = useState([]);
 
-  // Fetch inscriptions
   const fetchInscriptions = async () => {
     try {
       const response = await EventService.getOne(id);
       const insc = response.event.inscriptions || [];
-      setInscriptions(insc); // Update inscriptions
-      return insc; // Return for immediate use
+      setInscriptions(insc);
+      return insc;
     } catch (error) {
       console.error("Failed to fetch inscriptions:", error);
       return [];
     }
   };
 
-  // Fetch participants and filter based on current inscriptions
   const fetchParticipants = async (currentInscriptions) => {
     try {
       const res = await ParticipantService.getAll();
@@ -36,17 +34,14 @@ export default function AddParticipant({ show, onClose }) {
     }
   };
 
-  // Combined fetch for initial data
   const fetchData = async () => {
     const currentInscriptions = await fetchInscriptions();
     await fetchParticipants(currentInscriptions);
   };
 
-  // Handle adding a participant
   const handleAdd = async (participantId) => {
     try {
       await inscriptionService.add(id, participantId);
-      // Refresh data after adding
       await fetchData();
       onClose();
     } catch (error) {
@@ -58,21 +53,21 @@ export default function AddParticipant({ show, onClose }) {
     if (show) {
       fetchData();
     }
-  }, [show]); // Only re-fetch when the modal is shown
+  }, [show]);
 
   if (!show) {
     return null;
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0  bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-gray-800 text-white p-6 rounded-md max-w-[80%] w-full">
         <h2 className="text-xl font-bold mb-4">Add Participant to the event</h2>
         <div className="flex overflow-x-auto space-x-4 p-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-200">
           {participants.map((participant) => (
             <div
               key={participant._id}
-              className="w-full px-6 py-6 text-center bg-black rounded-lg"
+              className="w-[300px] px-6 py-6 text-center bg-black rounded-lg"
             >
               <div className="space-y-4">
                 <img

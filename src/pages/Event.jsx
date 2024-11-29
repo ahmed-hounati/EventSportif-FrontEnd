@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import EventService from "../services/event.service";
 import inscriptionService from "../services/inscription.service";
 import AddParticipant from "../components/AddParticipant";
+import UpdateEvent from "../components/UpdateEvent";
 
 export default function Event() {
   const { id } = useParams();
@@ -10,6 +11,8 @@ export default function Event() {
   const [participants, setParticipants] = useState([]);
   const [isScrolled, setIsScrolled] = useState(false);
   const [addParticipant, setAddParticipant] = useState(false);
+  const [updateEvent, setUpdateEvent] = useState(false);
+  const navigate = useNavigate();
 
   const fetchEvent = async () => {
     try {
@@ -26,6 +29,24 @@ export default function Event() {
       setParticipants(response.Inscriptions);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleDelete = async (participant) => {
+    try {
+      await inscriptionService.remove(id, participant);
+      fetchInscription();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteEvent = async () => {
+    try {
+      await EventService.remove(id);
+      navigate("/events");
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -127,12 +148,10 @@ export default function Event() {
         </div>
         <div className="flex flex-row gap-5 text-white">
           <div className="bg-slate-700 w-[100px] h-9 flex items-center justify-center rounded-lg">
-            <button onClick={() => handleUpdate(participant)}>Update</button>
+            <button onClick={() => setUpdateEvent(event)}>Update</button>
           </div>
           <div className="bg-red-700 w-[100px] h-9 flex items-center justify-center rounded-lg">
-            <button onClick={() => handleDelete(participant._id)}>
-              Delete
-            </button>
+            <button onClick={() => handleDeleteEvent(event._id)}>Delete</button>
           </div>
         </div>
       </section>
@@ -232,6 +251,11 @@ export default function Event() {
       <AddParticipant
         show={addParticipant}
         onClose={() => fetchInscription() && setAddParticipant(false)}
+      />
+      <UpdateEvent
+        show={updateEvent}
+        onClose={() => fetchEvent() && setUpdateEvent(false)}
+        event={event}
       />
     </div>
   );

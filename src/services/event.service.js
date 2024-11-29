@@ -48,7 +48,7 @@ const add = async (data) => {
 const update = async (id, data) => {
     let token = JSON.parse(localStorage.getItem("token"));
     try {
-        const response = await axios.put(`${Api}/participant/update/${id}`, data, {
+        const response = await axios.put(`${Api}/event/update/${id}`, data, {
             headers: {
                 Authorization: `bearer ${token}`,
                 "Content-Type": "multipart/form-data"
@@ -63,10 +63,9 @@ const update = async (id, data) => {
 const remove = async (id) => {
     let token = JSON.parse(localStorage.getItem("token"));
     try {
-        const response = await axios.delete(`${Api}/participant/delete/${id}`, {
+        const response = await axios.delete(`${Api}/event/delete/${id}`, {
             headers: {
-                Authorization: `bearer ${token}`,
-                "Content-Type": "multipart/form-data"
+                Authorization: `bearer ${token}`
             }
         });
         return response.data;

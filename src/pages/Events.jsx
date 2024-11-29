@@ -42,7 +42,7 @@ export default function Events() {
           const { formattedDate, formattedTime } = formatDate(event.startDate);
           return (
             <div
-              key={event.id}
+              key={event._id}
               className="bg-[#16243E] shadow-lg rounded-lg overflow-hidden"
             >
               <Link to={`/event/${event._id}`}>

@@ -32,13 +32,13 @@ const add = async (id, participant) => {
     }
 };
 
-const remove = async (id) => {
+const remove = async (id, participant) => {
+
     let token = JSON.parse(localStorage.getItem("token"));
     try {
-        const response = await axios.delete(`${Api}/participant/delete/${id}`, {
+        const response = await axios.post(`${Api}/inscription/delete/${id}`, { user: participant }, {
             headers: {
-                Authorization: `bearer ${token}`,
-                "Content-Type": "multipart/form-data"
+                Authorization: `bearer ${token}`
             }
         });
         return response.data;
