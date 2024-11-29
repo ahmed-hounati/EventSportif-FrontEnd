@@ -7,4 +7,11 @@ export default defineConfig({
     'process.env': {},
   },
   plugins: [react()],
+  server: {
+    host: true,
+    port: 5173,
+    watch: {
+      usePolling: true,
+    },
+  },
 })

@@ -5,14 +5,15 @@ export default function Dashboard() {
   return (
     <section className="text-white">
       <h1 className="text-3xl text-center font-bold pt-10">Dashboard</h1>
-      <div className="flex flex-row items-center justify-center py-10 gap-[200px] pt-[100px]">
+      <div className="flex flex-col md:flex-row items-center justify-center py-10 gap-10 md:gap-20 pt-[100px]">
         <Link to={"/participants"}>
-          <div className="w-[300px] h-[300px] bg-slate-700 flex flex-col gap-7 items-center justify-center rounded-xl transition-transform duration-500 hover:scale-105 hover:-translate-y-2">
+          <div className="w-[250px] sm:w-[300px] h-[250px] sm:h-[300px] bg-slate-700 flex flex-col gap-7 items-center justify-center rounded-xl transition-transform duration-500 hover:scale-105 hover:-translate-y-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              height="150"
-              width="150"
+              height="120"
+              width="120"
               viewBox="0 0 448 512"
+              className="w-24 h-24 md:w-36 md:h-36"
             >
               <path
                 fill="#00b140"
@@ -23,12 +24,13 @@ export default function Dashboard() {
           </div>
         </Link>
         <Link to={"/events"}>
-          <div className="w-[300px] h-[300px] bg-slate-700 flex flex-col gap-7 items-center justify-center rounded-xl transition-transform duration-500 hover:scale-105 hover:-translate-y-2">
+          <div className="w-[250px] sm:w-[300px] h-[250px] sm:h-[300px] bg-slate-700 flex flex-col gap-7 items-center justify-center rounded-xl transition-transform duration-500 hover:scale-105 hover:-translate-y-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              height="150"
-              width="150"
+              height="120"
+              width="120"
               viewBox="0 0 448 512"
+              className="w-24 h-24 md:w-36 md:h-36"
             >
               <path
                 fill="#00b140"
