@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const isLoggedIn = !!JSON.parse(localStorage.getItem("token"));
   return (
     <section className="text-white p-8">
       <div className="text-center">
@@ -22,9 +26,23 @@ export default function Home() {
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <button className="bg-[#00b140] px-3 py-3 rounded-lg">
-          <Link to={"/login"}>Login</Link>
-        </button>
+        {isLoggedIn ? (
+          <Link
+            to="/dashboard"
+            className="bg-[#00b140] px-4 py-2 rounded text-sm md:text-base text-white hover:bg-green-600 transition-all duration-300"
+          >
+            Dashboard
+          </Link>
+        ) : (
+          location.pathname !== "/login" && (
+            <Link
+              to="/login"
+              className="bg-[#00b140] px-4 py-2 rounded text-sm md:text-base text-white hover:bg-green-600 transition-all duration-300"
+            >
+              Login
+            </Link>
+          )
+        )}
       </div>
     </section>
   );

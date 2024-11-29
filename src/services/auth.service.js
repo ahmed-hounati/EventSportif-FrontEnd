@@ -19,7 +19,7 @@ const login = async (email, password) => {
 const logout = async () => {
     let token = JSON.parse(localStorage.getItem("token"));
     try {
-        const response = await axios.post(API_URL + "auth/logout", {}, {
+        const response = await axios.post(`${Api}/auth/logout`, {}, {
             headers: {
                 Authorization: `bearer ${token}`,
             }
@@ -32,15 +32,9 @@ const logout = async () => {
     }
 };
 
-
-const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem("user"));
-};
-
 const AuthService = {
     login,
-    logout,
-    getCurrentUser
+    logout
 }
 
 export default AuthService;

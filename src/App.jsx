@@ -1,14 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import SubmitEvent from "./pages/SubmitEvent";
-import Footer from "./components/Footer";
 import NavBAr from "./components/NavBar";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
+import Participants from "./pages/Participants";
+import Events from "./pages/Events";
 
 const App = () => {
   return (
@@ -26,11 +24,23 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          {/* <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/submit-event" element={<SubmitEvent />} /> */}
+          <Route
+            path="/participants"
+            element={
+              <ProtectedRoute>
+                <Participants />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/events"
+            element={
+              <ProtectedRoute>
+                <Events />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
-        {/* <Footer /> */}
       </div>
     </Router>
   );

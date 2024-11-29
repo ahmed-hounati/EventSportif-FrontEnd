@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
@@ -10,9 +10,11 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  if (localStorage.getItem("token")) {
-    navigate("/dashboard");
-  }
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("token"))) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const validateInputs = () => {
     if (!email || !password) {

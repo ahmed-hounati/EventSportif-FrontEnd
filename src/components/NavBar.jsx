@@ -1,19 +1,23 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import AuthService from "../services/auth.service";
 
 export default function NavBar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Check if a user is logged in
-  const isLoggedIn = !!localStorage.getItem("token");
+  const isLoggedIn = !!JSON.parse(localStorage.getItem("token"));
 
-  // Handle logout
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+  async function handleLogout() {
+    try {
+      await AuthService.logout();
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="text-white py-3 px-6 md:px-8 flex justify-between items-center">
